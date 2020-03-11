@@ -1,0 +1,57 @@
+import os
+import pandas as pd
+import numpy as np 
+import matplotlib.pyplot as plt
+import seaborn as sns
+import warnings
+warnings.filterwarnings("ignore")
+%matplotlib.inline
+
+os.chdir(r"C:\Users\DELL\Downloads\data visulization in Python-Matplotlib")
+
+data=pd.read_csv('hrdata.csv')
+daat2=pd.read_csv('MMix.csv')
+data3=pd.read_csv('iris.csv')
+
+HISTOGRAM
+
+plt.figure(figsize=(15,7))
+plt.hist(data['Income'],bins=20,color='black',alpha=0.8)  #alpha defines the transparency of the color
+plt.xlabel('Income')
+plt.ylabel('Frequency')
+plt.title('Histogram for Income')
+plt.show()
+
+from matplotlib import style
+style.use('seaborn-pastel')
+
+plt.figure(figsize=(15,7))
+plt.hist(data['Income'],bins=20,color='black',alpha=0.8)  #alpha defines the transparency of the color
+plt.xlabel('Income')
+plt.ylabel('Frequency')
+plt.title('Histogram for Income')
+plt.savefig('histogram.pdf')
+
+Density Plot
+
+data['Income'].plot(kind='Density',ls='--')
+
+Histogram with Density Plot
+
+ax=data['Income'].plot(kind='hist',color='lightblue')
+ax1 = data['Income'].plot(kind='density',color='blue',secondary_y=True)# secondaryy permits to draw the second graph
+ax.set_ylabel('Frequency(No.of Employees)')
+ax1.set_ylabel("Density")
+ax1.set_xlabel("Income")
+ax.set_title("Histogram with Density")
+
+Box Plot
+
+plt.boxplot(data['Income'],vert='False')
+sns.boxplot(data=data3,orient='h',palette='Set1')
+
+Scatter Plot
+
+plt.scatter(x=data['Age'],y=data['Income'])
+sns.heatmap(data3.corr(),annot=True)
+data3.corr()
